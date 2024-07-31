@@ -29,14 +29,14 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
     public void OnTouchPress(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
-        {
+        {   
             onTouchEvent?.Invoke(inputActions.TouchPosition.ReadValue<Vector2>());
         }
     }
 
     public void OnTouchPosition(InputAction.CallbackContext context)
     {
-        
+       
     }
 
     private void OnDisable()

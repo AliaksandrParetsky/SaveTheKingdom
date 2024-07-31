@@ -64,7 +64,7 @@ PrefabInstance:
       addedObject: {fileID: 4260313006150055306}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 769c35aa34277734eb3d912dcada6f28, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2905683799191952836}
+      addedObject: {fileID: 3416494927235887099}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 769c35aa34277734eb3d912dcada6f28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2771521028748594212}
@@ -117,7 +117,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2905683799191952836
+--- !u!114 &3416494927235887099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,10 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3627514595018058492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8703dbc83299c1846a46fe35eb40f6ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ed98f443ac25794eaf6b4123470b166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementComponent: {fileID: 2771521028748594212}
 --- !u!114 &2771521028748594212
 MonoBehaviour:
   m_ObjectHideFlags: 0
