@@ -1,24 +1,34 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(MovementComponent))]
-public abstract class Character : MonoBehaviour
+public class Character : MonoBehaviour, IDamageable, IAttacker
 {
-    private NavMeshAgent agent;
-    public NavMeshAgent Agent
-    {
-        get { return agent = agent ?? GetComponent<NavMeshAgent>(); }
-    }
+    private Health health;
+    private AttackBehavior attackBehavior;
+
     public bool Selected { get; set; }
     
     private void OnEnable()
     {
+        health = GetComponent<Health>();
+        attackBehavior = GetComponent<AttackBehavior>();
+
         Squad.characters.Add(this);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health.ReduceHealth(damage);
+    }
+
+    public void Attack()
+    {
+        attackBehavior.Attack();
     }
 
     public override string ToString()
     {
-        return gameObject.name;
+        return $"Character Name: {gameObject.name}, Helth: {health.ToString()}, Attack: {attackBehavior.ToString()}";
     }
 
     private void OnDisable()
@@ -26,4 +36,5 @@ public abstract class Character : MonoBehaviour
         Squad.characters.Remove(this);
     }
 
+    
 }
