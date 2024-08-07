@@ -71,6 +71,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4803014352389650695, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2308137125398019034}
+    - targetCorrespondingSourceObject: {fileID: 4803014352389650695, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7343721636009716112}
   m_SourcePrefab: {fileID: 100100000, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
 --- !u!1 &3298783251626141852 stripped
 GameObject:
@@ -87,7 +90,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -334000983
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -141,11 +144,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Size: {x: 2, y: 1.5, z: 2}
   m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!114 &8482173537069253102
 MonoBehaviour:
@@ -171,3 +174,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274cb0f4fa946e246893607d5fbc62d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7343721636009716112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298783251626141852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33d51f4fe8d3994fb6deaa06dcb6917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  armor: 1

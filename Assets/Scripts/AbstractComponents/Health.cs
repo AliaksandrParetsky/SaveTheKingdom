@@ -17,6 +17,9 @@ public class Health : MonoBehaviour
         if(health <= 0)
         {
             died?.Invoke();
+            print($"{gameObject.name} died");
+
+            Death();
         }
     }
 
@@ -32,5 +35,11 @@ public class Health : MonoBehaviour
         }
 
         return base.ToString();
+    }
+
+    private void Death()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
     }
 }

@@ -32,13 +32,27 @@ public class TouchManagers : Singleton<TouchManagers>
 
                 return;
             }
-
-            if (selectedCharacter != null && selectedCharacter.Selected)
+            if(hitInfo.transform.TryGetComponent<Enemy>(out var currentEnemy))
             {
-                if (selectedCharacter.TryGetComponent<IMovable>(out var movable))
+                if(selectedCharacter == null)
                 {
-                    movable.Move(hitInfo.point);
+                    print($"{currentEnemy.name}");
                 }
+
+                MoveToPoint(hitInfo.point);
+            }
+
+            MoveToPoint(hitInfo.point);
+        }
+    }
+
+    private void MoveToPoint(Vector3 point)
+    {
+        if (selectedCharacter != null && selectedCharacter.Selected)
+        {
+            if (selectedCharacter.TryGetComponent<IMovable>(out var movable))
+            {
+                movable.Move(point);
             }
         }
     }

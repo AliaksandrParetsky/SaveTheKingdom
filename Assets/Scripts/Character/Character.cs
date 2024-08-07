@@ -1,13 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MovementComponent))]
-public class Character : MonoBehaviour, IDamageable, IAttacker
+public class Character : MonoBehaviour, IDamageable
 {
     private Health health;
     private AttackBehavior attackBehavior;
 
     public bool Selected { get; set; }
-    
+
     private void OnEnable()
     {
         health = GetComponent<Health>();
@@ -21,9 +20,9 @@ public class Character : MonoBehaviour, IDamageable, IAttacker
         health.ReduceHealth(damage);
     }
 
-    public void Attack()
+    public Transform GetTransform()
     {
-        attackBehavior.Attack();
+        return transform;
     }
 
     public override string ToString()

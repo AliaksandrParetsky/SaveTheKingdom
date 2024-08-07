@@ -90,11 +90,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.4
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 2000
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -121,7 +121,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.9000001, z: 1}
+  m_Size: {x: 2, y: 1.9000001, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5897689873734996225
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 150
-  armor: 35
+  armor: 2
 --- !u!114 &7069796985884173675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,5 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfaaff187e505a4ca8b186ec34fd0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  attackDelay: 0
+  damage: 10
+  attackDelay: 1
+  enemySearchRadius: 20

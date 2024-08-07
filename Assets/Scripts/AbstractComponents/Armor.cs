@@ -7,8 +7,10 @@ public class Armor : Health
 
     public override void ReduceHealth(int damage)
     {
-        damage = damage / armor;
+        damage = damage - CharacterArmor;
 
         base.ReduceHealth(damage);
+
+        Debug.Log($"{gameObject.name} take {damage} damage");
     }
 }

@@ -7,8 +7,10 @@ public class Agility : Health
 
     public override void ReduceHealth(int damage)
     {
-        damage = damage - agility;
+        damage = damage - CharacterAgility;
 
         base.ReduceHealth(damage);
+
+        Debug.Log($"{gameObject.name} take {damage} damage");
     }
 }
