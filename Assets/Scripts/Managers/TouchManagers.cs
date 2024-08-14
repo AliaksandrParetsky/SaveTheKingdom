@@ -6,8 +6,6 @@ public class TouchManagers : Singleton<TouchManagers>
     private Camera cameraMain;
     private Character selectedCharacter;
 
-    private MovementComponent movementComponent;
-
     private void Awake()
     {
         inputManager = InputManager.Instance;
@@ -17,7 +15,7 @@ public class TouchManagers : Singleton<TouchManagers>
     {
         cameraMain = Camera.main;
 
-        inputManager.onTouchEvent += Touch;
+        inputManager.OnTouchEvent += Touch;
     }
 
     private void Touch(Vector2 screenTouchPosition)
@@ -39,14 +37,29 @@ public class TouchManagers : Singleton<TouchManagers>
                     print($"{currentEnemy.name}");
                 }
 
-                MoveToPoint(hitInfo.point);
+                Health targetEnemy = currentEnemy.GetComponent<Health>();
+
+                MoveToTarget(targetEnemy);
+
+                return;
             }
 
-            MoveToPoint(hitInfo.point);
+            MoveToTarget(hitInfo.point);
         }
     }
 
-    private void MoveToPoint(Vector3 point)
+    private void MoveToTarget(Health target)
+    {
+        if (selectedCharacter != null && selectedCharacter.Selected)
+        {
+            if (selectedCharacter.TryGetComponent<IMovable>(out var movable))
+            {
+                movable.MoveToEnemy(target);
+            }
+        }
+    }
+
+    private void MoveToTarget(Vector3 point)
     {
         if (selectedCharacter != null && selectedCharacter.Selected)
         {
@@ -65,10 +78,10 @@ public class TouchManagers : Singleton<TouchManagers>
 
         print(character.ToString());
 
-        SetFalseSelectedCharacter(character);
+        SetFalseSelectedCharacters(character);
     }
 
-    private void SetFalseSelectedCharacter(Character selectedCharcter)
+    private void SetFalseSelectedCharacters(Character selectedCharcter)
     {
         foreach (Character personage in Squad.characters)
         {
@@ -81,6 +94,6 @@ public class TouchManagers : Singleton<TouchManagers>
 
     private void OnDisable()
     {
-        inputManager.onTouchEvent -= Touch;
+        inputManager.OnTouchEvent -= Touch;
     }
 }

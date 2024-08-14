@@ -1,105 +1,85 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent (typeof(Collider))]
 public abstract class AttackBehavior : MonoBehaviour
 {
     [SerializeField] protected int damage;
     [SerializeField] protected float attackDelay;
-    [SerializeField] protected float enemySearchRadius;
+    [SerializeField] protected float radiusAttack;
+    private bool isAttack;
+    public bool IsAttack { get { return isAttack; } private set { isAttack = value; } }
 
-    protected List<NavMeshAgent> targets = new List<NavMeshAgent>();
-
-    protected NavMeshAgent currentTarget;
-    protected NavMeshAgent agent;
-
-    protected bool isAttacked;
+    private Health currentTarget;
+    public Health CurrentTarget { get { return currentTarget; } set { currentTarget = value; } }
 
     private void OnEnable()
     {
-        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(CheckAttack());
     }
 
-    public abstract void Attack();
-    public abstract void StopAttack();
-
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator CheckAttack()
     {
-        if (!isAttacked)
+        while (true)
         {
-            CheckEnemy();
+            yield return new WaitForSeconds(0.5f);
 
-            Attack();
-
-            isAttacked = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        currentTarget = null;
-        targets.Clear();
-    }
-
-    protected IEnumerator GetClosestTarget()
-    {
-        float closestDistance = float.MaxValue;
-        currentTarget = null;
-        for (int i = 0; i < targets.Count; i++)
-        {
-            if (agent.SetDestination(targets[i].transform.position))
+            if (CurrentTarget != null && !IsAttack && CanAttack())
             {
-                while (agent.pathPending)
-                {
-                    yield return null;
-                }
+                IsAttack = true;
 
-                Debug.Log(agent.pathStatus.ToString());
+                print($"{gameObject.name} - Attacked!");
 
-                if (agent.pathStatus != NavMeshPathStatus.PathInvalid)
-                {
-                    float pathDistance = 0;
-                    pathDistance += Vector3.Distance(transform.position, agent.path.corners[0]);
-                    for (int j = 1; j < agent.path.corners.Length; j++)
-                    {
-                        pathDistance += Vector3.Distance(agent.path.corners[j - 1], agent.path.corners[j]);
-                    }
-
-                    if (closestDistance > pathDistance)
-                    {
-                        closestDistance = pathDistance;
-                        currentTarget = targets[i];
-                        agent.ResetPath();
-                    }
-                }
-                else
-                {
-                    Debug.Log("невозможно дойти до " + targets[i].name);
-                }
+                StartCoroutine(CoroutineAttack());
             }
         }
-        if (currentTarget != null)
-        {
-            agent.SetDestination(currentTarget.transform.position);
-        }
     }
 
-    protected void CheckEnemy()
+    private IEnumerator CoroutineAttack()
     {
-        targets.Clear();
+        WaitForSeconds delay = new (attackDelay);
 
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, enemySearchRadius);
-        foreach (Collider collider in hitColliders)
+        while (CurrentTarget != null && CanAttack())
         {
-            if (collider.gameObject.TryGetComponent<Enemy>(out var enemyAgent))
+            CurrentTarget.ReduceHealth(damage);
+
+            if (DisableTargets(CurrentTarget))
             {
-                NavMeshAgent agent = enemyAgent.gameObject.GetComponent<NavMeshAgent>();
-                targets.Add(agent);
+                CurrentTarget = null;
             }
+
+            yield return delay;
         }
 
-        StartCoroutine(GetClosestTarget());
+        IsAttack = false;
+
+        print($"{gameObject.name} - Exite Attacked!");
+    }
+
+    protected virtual bool CanAttack()
+    {
+        var distance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
+
+        if (distance <= radiusAttack)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool DisableTargets(Health target)
+    {
+        if (target != null && !target.gameObject.activeSelf)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(CoroutineAttack());
+        StopCoroutine(CheckAttack());
     }
 }

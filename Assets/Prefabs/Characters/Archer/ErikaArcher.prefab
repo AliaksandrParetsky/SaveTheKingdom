@@ -74,6 +74,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3655bded3958b744e88f1540ce91a13b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5381380340504271163}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3655bded3958b744e88f1540ce91a13b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5346511085237013127}
   m_SourcePrefab: {fileID: 100100000, guid: 3655bded3958b744e88f1540ce91a13b, type: 3}
 --- !u!1 &2581993141276710370 stripped
 GameObject:
@@ -121,7 +124,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.7, z: 2}
+  m_Size: {x: 1, y: 1.7, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1278006524197175458
 MonoBehaviour:
@@ -175,4 +178,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   attackDelay: 1
-  enemySearchRadius: 50
+  radiusAttack: 20
+--- !u!114 &5346511085237013127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581993141276710370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f01053aac8d0946afadb24d1f326b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySearchRadius: 30

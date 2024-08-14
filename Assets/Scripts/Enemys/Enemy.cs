@@ -1,30 +1,22 @@
 using UnityEngine;
 
 [RequireComponent (typeof(MovementComponent))]
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : BaseCharacter
 {
-    private Health health;
+    public Vector3 mainTarget;
 
-    public bool EnemySelected { get; set; }
+    private IMovable movable;
 
     private void OnEnable()
     {
+        mainTarget = FindObjectOfType<MinionesSpawner>().transform.position;
         health = GetComponent<Health>();
 
-        IMovable movable = GetComponent<IMovable>();
-
-        Transform target = FindObjectOfType<MinionesSpawner>().transform;
-
-        movable.Move(target.transform.position);
+        movable = GetComponent<IMovable>();
     }
 
-    public Transform GetTransform()
+    private void Start()
     {
-        return transform;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health.ReduceHealth(damage);
+        movable.Move(mainTarget);
     }
 }

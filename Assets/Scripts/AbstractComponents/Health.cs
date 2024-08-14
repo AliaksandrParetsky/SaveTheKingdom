@@ -4,7 +4,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event Action<int> changed;
-    public event Action died;
+    public event Action diedEvent;
 
     [SerializeField] private int health;
 
@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
 
         if(health <= 0)
         {
-            died?.Invoke();
+            diedEvent?.Invoke();
             print($"{gameObject.name} died");
 
             Death();

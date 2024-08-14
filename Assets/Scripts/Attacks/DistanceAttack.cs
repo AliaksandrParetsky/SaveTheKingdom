@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class DistanceAttack : AttackBehavior
+public class DistanceAttack : MeleeAttack
 {
-    public override void Attack()
+    protected override bool CanAttack()
     {
-        Debug.Log("Дистанционная атака");
-    }
+        var distance = Vector3.Distance(transform.position, CurrentTarget.transform.position);
 
-    public override void StopAttack()
-    {
-        Debug.Log("Дистанционная атака остановлина");
+        if (distance <= radiusAttack)
+        {
+            if(TryGetComponent<IMovable>(out var movable))
+            {
+                movable.StopMoveDistanceCharacter();
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

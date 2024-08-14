@@ -9,8 +9,8 @@ public class Armor : Health
     {
         damage = damage - CharacterArmor;
 
-        base.ReduceHealth(damage);
-
         Debug.Log($"{gameObject.name} take {damage} damage");
+
+        base.ReduceHealth(damage);
     }
 }

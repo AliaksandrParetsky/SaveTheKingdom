@@ -7,7 +7,7 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
     private InputControls inputControls;
     private InputControls.GameInputActions inputActions;
 
-    public event Action<Vector2> onTouchEvent;
+    public event Action<Vector2> OnTouchEvent;
 
     private void OnEnable()
     {
@@ -30,7 +30,7 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
     {
         if (context.phase == InputActionPhase.Started)
         {   
-            onTouchEvent?.Invoke(inputActions.TouchPosition.ReadValue<Vector2>());
+            OnTouchEvent?.Invoke(inputActions.TouchPosition.ReadValue<Vector2>());
         }
     }
 

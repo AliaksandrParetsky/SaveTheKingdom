@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Enemy enemy;
 
-    private void Start()
+    private void Awake()
     {
         CreateEnemyPrefab();
     }
