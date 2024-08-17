@@ -3,20 +3,35 @@ using UnityEngine;
 [RequireComponent (typeof(MovementComponent))]
 public class Enemy : BaseCharacter
 {
-    public Vector3 mainTarget;
+    private Health mainTarget;
+    public Health MainTarget { get { return mainTarget; } private set { mainTarget = value; } }
 
     private IMovable movable;
 
+    private Health health;
+
     private void OnEnable()
     {
-        mainTarget = FindObjectOfType<MinionesSpawner>().transform.position;
         health = GetComponent<Health>();
+
+        health.diedEvent += SetEnabled;
+
+        MainTarget = FindObjectOfType<MinionesSpawner>().GetComponent<Health>();
 
         movable = GetComponent<IMovable>();
     }
 
     private void Start()
     {
-        movable.Move(mainTarget);
+        movable.Move(MainTarget.transform.position);
+    }
+    private void SetEnabled()
+    {
+        enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        health.diedEvent -= SetEnabled;
     }
 }

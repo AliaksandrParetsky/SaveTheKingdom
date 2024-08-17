@@ -44,7 +44,7 @@ public class TouchManagers : Singleton<TouchManagers>
                 return;
             }
 
-            MoveToTarget(hitInfo.point);
+            MoveToPoint(hitInfo.point);
         }
     }
 
@@ -59,7 +59,7 @@ public class TouchManagers : Singleton<TouchManagers>
         }
     }
 
-    private void MoveToTarget(Vector3 point)
+    private void MoveToPoint(Vector3 point)
     {
         if (selectedCharacter != null && selectedCharacter.Selected)
         {

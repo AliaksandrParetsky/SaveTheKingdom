@@ -7,6 +7,10 @@ public abstract class AttackBehavior : MonoBehaviour
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float radiusAttack;
     private bool isAttack;
+
+    private Animator animator;
+    private Health health;
+
     public bool IsAttack { get { return isAttack; } private set { isAttack = value; } }
 
     private Health currentTarget;
@@ -14,12 +18,23 @@ public abstract class AttackBehavior : MonoBehaviour
 
     private void OnEnable()
     {
+        health = GetComponent<Health>();
+        animator = GetComponent<Animator>();
+
+        health.diedEvent += SetEnabled;
+
         StartCoroutine(CheckAttack());
+    }
+
+    private void SetEnabled()
+    {
+        enabled = false;
+        StopAllCoroutines();
     }
 
     private IEnumerator CheckAttack()
     {
-        while (true)
+        while (enabled)
         {
             yield return new WaitForSeconds(0.5f);
 
@@ -40,15 +55,19 @@ public abstract class AttackBehavior : MonoBehaviour
 
         while (CurrentTarget != null && CanAttack())
         {
+            animator.SetBool("isAttack", true);
+
             CurrentTarget.ReduceHealth(damage);
 
-            if (DisableTargets(CurrentTarget))
+            if (CurrentTarget.CheckDied())
             {
                 CurrentTarget = null;
             }
 
             yield return delay;
         }
+
+        animator.SetBool("isAttack", false);
 
         IsAttack = false;
 
@@ -67,18 +86,12 @@ public abstract class AttackBehavior : MonoBehaviour
         return false;
     }
 
-    private bool DisableTargets(Health target)
-    {
-        if (target != null && !target.gameObject.activeSelf)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    
 
     private void OnDisable()
     {
+        health.diedEvent += SetEnabled;
+
         StopCoroutine(CoroutineAttack());
         StopCoroutine(CheckAttack());
     }

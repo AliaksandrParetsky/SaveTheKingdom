@@ -14,19 +14,31 @@ public class GoalSearch : MonoBehaviour
     private AttackBehavior attackBehavior;
     private NavMeshAgent agent;
     private IMovable movable;
+    private Health health;
 
     private void OnEnable()
     {
+        health = GetComponent<Health>();
         attackBehavior = GetComponent<AttackBehavior>();
         agent = GetComponent<NavMeshAgent>();
         movable = GetComponent<IMovable>();
 
+        health.diedEvent += SetEnabled;
+
         StartCoroutine(SearchEnemy());
+    }
+
+    private void SetEnabled()
+    {
+        enabled = false;
+        targets.Clear();
+        attackBehavior.CurrentTarget = null;
+        StopAllCoroutines();
     }
 
     private IEnumerator SearchEnemy()
     {
-        while (true)
+        while (enabled)
         {
             yield return new WaitForSeconds(enemySearchDelay);
 
@@ -48,12 +60,24 @@ public class GoalSearch : MonoBehaviour
 
         if (GetComponent<Enemy>())
         {
-            targets = characters;
+            foreach(Health character in characters)
+            {
+                if (character.enabled)
+                {
+                    targets.Add(character);
+                }
+            }
         }
 
         if (GetComponent<Character>())
         {
-            targets = enemys;
+            foreach (Health enemy in enemys)
+            {
+                if (enemy.enabled)
+                {
+                    targets.Add(enemy);
+                }
+            }
         }
 
         if(targets.Count > 0)
@@ -64,9 +88,12 @@ public class GoalSearch : MonoBehaviour
         {
             attackBehavior.CurrentTarget = null;
 
+           
+
             if(TryGetComponent<Enemy>(out var enemy))
             {
-                movable.Move(enemy.mainTarget);
+                attackBehavior.CurrentTarget = enemy.MainTarget;
+                movable.MoveToEnemy(attackBehavior.CurrentTarget);
             }
         }
     }
@@ -84,7 +111,7 @@ public class GoalSearch : MonoBehaviour
                     yield return null;
                 }
 
-                Debug.Log(agent.pathStatus.ToString());
+                Debug.Log(agent.pathStatus.ToString() + $"{gameObject.name}");
 
                 if (agent.pathStatus != NavMeshPathStatus.PathInvalid)
                 {
@@ -119,6 +146,8 @@ public class GoalSearch : MonoBehaviour
 
     private void OnDisable()
     {
+        health.diedEvent -= SetEnabled;
+
         StopCoroutine(SearchEnemy());
         StopCoroutine(GetClosestTarget());
     }

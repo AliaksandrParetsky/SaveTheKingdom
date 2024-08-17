@@ -61,6 +61,9 @@ PrefabInstance:
       addedObject: {fileID: 5843965958863071275}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 769c35aa34277734eb3d912dcada6f28, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5711929795049987768}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 769c35aa34277734eb3d912dcada6f28, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4260313006150055306}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 769c35aa34277734eb3d912dcada6f28, type: 3}
       insertIndex: -1
@@ -105,6 +108,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &5711929795049987768
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627514595018058492}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b62af33f928e6b4084aff6486904321, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &4260313006150055306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,8 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33d51f4fe8d3994fb6deaa06dcb6917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  armor: 2
+  health: 20
+  armor: 0
 --- !u!114 &1259570850905595912
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,11 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MinionesSpawner : MonoBehaviour
 {
-    [SerializeField] private Character erikaArcherPrefab;
-    [SerializeField] private Character paladinPrefab;
-    [SerializeField] private Character crusaderTankPrefab;
-    [SerializeField] private Character mariaSwordswomanPrefab;
+    [SerializeField] List<Character> charactersPrefabs = new List<Character>();
 
     private void Awake()
     {
@@ -15,14 +13,17 @@ public class MinionesSpawner : MonoBehaviour
     private void CreateCharacters()
     {
         var rotation = Quaternion.identity;
-        var position = gameObject.transform.position;
 
-        Character erikaArcher = Instantiate(erikaArcherPrefab, position, rotation);
+        foreach (var character in charactersPrefabs)
+        {
+            Instantiate(character, GetRandomPosition(), rotation);
+        }
+    }
 
-        Character paladin = Instantiate(paladinPrefab, position, rotation);
+    private Vector3 GetRandomPosition()
+    {
+        Vector3 pos = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-45.0f, -40.0f));
 
-        Character mariaSwordswoman = Instantiate(mariaSwordswomanPrefab, position, rotation);
-
-        Character crusaderTank = Instantiate(crusaderTankPrefab, position, rotation);
+        return pos;
     }
 }
