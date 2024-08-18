@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d18bc5b518b212488404c35f8cac541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   agility: 1
 --- !u!114 &5381380340504271163
 MonoBehaviour:
@@ -200,9 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e1d40b69726a147bd2f8686641cc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 50
   attackDelay: 2
-  radiusAttack: 20
+  radiusAttack: 30
 --- !u!114 &5346511085237013127
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -72,7 +72,7 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(3);
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public bool CheckDied()
