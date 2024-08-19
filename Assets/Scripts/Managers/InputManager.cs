@@ -21,22 +21,20 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
         }
     }
 
-    public void OnTouchInput(InputAction.CallbackContext context)
+    public void OnTouch(InputAction.CallbackContext context)
     {
-        
-    }
-
-    public void OnTouchPress(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {   
-            OnTouchEvent?.Invoke(inputActions.TouchPosition.ReadValue<Vector2>());
+        if(context.phase == InputActionPhase.Started)
+        {
+            
         }
     }
 
     public void OnTouchPosition(InputAction.CallbackContext context)
     {
-       
+        if(context.phase == InputActionPhase.Performed)
+        {
+            OnTouchEvent?.Invoke(context.ReadValue<Vector2>());
+        } 
     }
 
     private void OnDisable()

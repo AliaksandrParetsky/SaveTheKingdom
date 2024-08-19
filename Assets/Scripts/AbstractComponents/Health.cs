@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     //public event Action<int> changed;
     public event Action diedEvent;
 
-    [SerializeField] private int health;
+    [SerializeField] private float health;
 
     private Animator animator;
     private NavMeshAgent meshAgent;
@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
         meshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public virtual void ReduceHealth(int damage)
+    public virtual void ReduceHealth(float damage)
     {
         if (!isDeid)
         {
@@ -36,20 +36,6 @@ public class Health : MonoBehaviour
                 StartCoroutine(Death());
             }
         }
-    }
-
-    public override string ToString()
-    {
-        if(this is Armor armor)
-        {
-            return $"Health: {health}, Armor: {armor.CharacterArmor}";
-        }
-        if(this is Agility agility)
-        {
-            return $"Health: {health}, Armor: {agility.CharacterAgility}";
-        }
-
-        return base.ToString();
     }
 
     private IEnumerator Death()

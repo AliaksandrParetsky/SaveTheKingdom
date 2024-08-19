@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent (typeof(MovementComponent))]
@@ -8,30 +9,23 @@ public class Enemy : BaseCharacter
 
     private IMovable movable;
 
-    private Health health;
-
-    private void OnEnable()
+    public override void OnEnable()
     {
-        health = GetComponent<Health>();
+        base.OnEnable();
 
-        health.diedEvent += SetEnabled;
-
-        MainTarget = FindObjectOfType<MinionesSpawner>().GetComponent<Health>();
+        if(FindObjectOfType<MinionesSpawner>())
+        {
+            MainTarget = FindObjectOfType<MinionesSpawner>().GetComponent<Health>();
+        }
 
         movable = GetComponent<IMovable>();
     }
 
     private void Start()
     {
-        movable.Move(MainTarget.transform.position);
-    }
-    private void SetEnabled()
-    {
-        enabled = false;
-    }
-
-    private void OnDisable()
-    {
-        health.diedEvent -= SetEnabled;
+        if(MainTarget != null)
+        {
+            movable.Move(MainTarget.transform.position);
+        }
     }
 }

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  agility: 1
+  agility: 2
 --- !u!114 &5381380340504271163
 MonoBehaviour:
   m_ObjectHideFlags: 0

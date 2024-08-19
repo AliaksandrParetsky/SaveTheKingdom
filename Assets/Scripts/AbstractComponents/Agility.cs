@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Agility : Health
 {
-    [SerializeField] private int agility;
-    public int CharacterAgility {  get { return agility; } }
+    [SerializeField] private float agility;
 
-    public override void ReduceHealth(int damage)
+    public override void ReduceHealth(float damage)
     {
-        damage = damage - CharacterAgility;
+        damage = damage - agility;
 
         base.ReduceHealth(damage);
 

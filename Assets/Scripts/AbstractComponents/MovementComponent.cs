@@ -44,12 +44,9 @@ public class MovementComponent : MonoBehaviour, IMovable
                 isMove= false;
             }
         }
-        if (isMoveToCharacter && !agent.isStopped)
+        if (targetHealth != null && isMoveToCharacter)
         {
-            if(targetHealth != null)
-            {
-                agent.destination = targetHealth.transform.position;
-            }
+            agent.destination = targetHealth.transform.position;
         }
     }
 

@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class Armor : Health
 {
-    [SerializeField] private int armor;
-    public int CharacterArmor { get { return armor; } }
+    [SerializeField] private float armor;
 
-    public override void ReduceHealth(int damage)
+    public override void ReduceHealth(float damage)
     {
-        damage = damage - CharacterArmor;
+        if (armor == 0)
+        {
+            base.ReduceHealth(damage);
+
+            Debug.Log($"{gameObject.name} take {damage} damage");
+
+            return;
+        }
+        else
+        {
+            damage = damage / armor;
+        }
 
         Debug.Log($"{gameObject.name} take {damage} damage");
 

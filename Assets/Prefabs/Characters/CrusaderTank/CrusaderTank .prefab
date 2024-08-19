@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33d51f4fe8d3994fb6deaa06dcb6917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
-  armor: 2
+  health: 200
+  armor: 3
 --- !u!114 &7069796985884173675
 MonoBehaviour:
   m_ObjectHideFlags: 0

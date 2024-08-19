@@ -1,28 +1,20 @@
 
-using System;
-
 public class Character : BaseCharacter
 {
-    private Health health;
-
     public bool Selected { get; set; }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        health = GetComponent<Health>();
-        health.diedEvent += SetEnabled;
+        base.OnEnable();
 
         Squad.characters.Add(this);
     }
 
-    private void SetEnabled()
-    {
-        enabled = false;
-    }
+    
 
-    private void OnDisable()
+    public override void OnDisable()
     {
-        health.diedEvent += SetEnabled;
+        base.OnDisable();
 
         Squad.characters.Remove(this);
     }
