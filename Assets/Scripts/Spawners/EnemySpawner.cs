@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IEnemySpawn
 {
     [SerializeField] private Enemy enemyZombyPrefab;
     [SerializeField] private Enemy enemyZomby_2Prefab;
@@ -20,8 +20,6 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-
-        StartCoroutine(CreateWave());
     }
 
     private Vector3 GetRandomPosition()
@@ -61,5 +59,15 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(60);
         }
+    }
+
+    public void StartSpawn()
+    {
+        StartCoroutine(CreateWave());
+    }
+
+    public void StopSpawn()
+    {
+        StopAllCoroutines();
     }
 }

@@ -1,45 +1,30 @@
 
-public enum GameState
-{
-    StartGame,
-    EndGame
-}
-
 public class StateManager : Singleton<StateManager>
 {
-    public GameState currentState;
+    private IGameState currentState;
 
-    private TouchManagers touchManagers;
-
-    private void Awake()
+    private void Start()
     {
-        touchManagers = TouchManagers.Instance;
+        SetState(gameObject.AddComponent<StartGameState>());
     }
 
-    private void OnEnable()
+    public void SetState(IGameState newState)
     {
-        StartGame();
-    }
+        if(currentState != null)
+        {
+            currentState.ExitState(this);
+        }
 
-    private void StartGame()
-    {
-        currentState = GameState.StartGame;
+        currentState = newState;
+        currentState.EnterState(this);
     }
 
     private void Update()
     {
-        if(currentState == GameState.StartGame)
+        if (currentState != null)
         {
-
-        }
-        else if(currentState == GameState.EndGame)
-        {
-
+            currentState.UpdateState(this);
         }
     }
 
-    private void EndGame()
-    {
-        currentState = GameState.EndGame;
-    }
 }

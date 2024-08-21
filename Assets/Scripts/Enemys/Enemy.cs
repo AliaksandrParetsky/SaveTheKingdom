@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent (typeof(MovementComponent))]
@@ -13,12 +12,14 @@ public class Enemy : BaseCharacter
     {
         base.OnEnable();
 
-        if(FindObjectOfType<MinionesSpawner>())
+        if(FindObjectOfType<CharactersSpawner>())
         {
-            MainTarget = FindObjectOfType<MinionesSpawner>().GetComponent<Health>();
+            MainTarget = FindObjectOfType<CharactersSpawner>().GetComponent<Health>();
         }
 
         movable = GetComponent<IMovable>();
+
+        EnemyList.enemies.Add(this);
     }
 
     private void Start()
@@ -27,5 +28,10 @@ public class Enemy : BaseCharacter
         {
             movable.Move(MainTarget.transform.position);
         }
+    }
+
+    public override void OnDisable()
+    {
+        EnemyList.enemies.Remove(this);
     }
 }
