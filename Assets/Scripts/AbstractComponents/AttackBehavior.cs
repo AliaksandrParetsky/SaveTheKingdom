@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class AttackBehavior : MonoBehaviour
+public class AttackBehavior : MonoBehaviour
 {
     [SerializeField] protected int damage;
     [SerializeField] protected float attackDelay;
@@ -29,6 +29,7 @@ public abstract class AttackBehavior : MonoBehaviour
     private void SetEnabled()
     {
         enabled = false;
+
         StopAllCoroutines();
     }
 
@@ -41,8 +42,6 @@ public abstract class AttackBehavior : MonoBehaviour
             if (CurrentTarget != null && !IsAttack && CanAttack())
             {
                 IsAttack = true;
-
-                print($"{gameObject.name} - Attacked!");
 
                 StartCoroutine(CoroutineAttack());
             }
@@ -70,8 +69,6 @@ public abstract class AttackBehavior : MonoBehaviour
         animator.SetBool("isAttack", false);
 
         IsAttack = false;
-
-        print($"{gameObject.name} - Exite Attacked!");
     }
 
     protected virtual bool CanAttack()
@@ -90,9 +87,8 @@ public abstract class AttackBehavior : MonoBehaviour
 
     private void OnDisable()
     {
-        health.diedEvent += SetEnabled;
+        health.diedEvent -= SetEnabled;
 
-        StopCoroutine(CoroutineAttack());
-        StopCoroutine(CheckAttack());
+        StopAllCoroutines();
     }
 }

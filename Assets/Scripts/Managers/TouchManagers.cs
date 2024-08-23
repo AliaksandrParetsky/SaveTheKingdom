@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TouchManagers : Singleton<TouchManagers>
@@ -5,6 +6,7 @@ public class TouchManagers : Singleton<TouchManagers>
     private InputManager inputManager;
     private Camera cameraMain;
     private Character selectedCharacter;
+    private Vector3 touchPosition;
 
     private void Awake()
     {
@@ -13,13 +15,13 @@ public class TouchManagers : Singleton<TouchManagers>
 
     private void OnEnable()
     {
-        cameraMain = Camera.main;
-
         inputManager.OnTouchEvent += Touch;
     }
 
     private void Touch(Vector2 screenTouchPosition)
     {
+        cameraMain = Camera.main;
+
         Ray ray = cameraMain.ScreenPointToRay(screenTouchPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity))
@@ -45,6 +47,8 @@ public class TouchManagers : Singleton<TouchManagers>
             }
 
             MoveToPoint(hitInfo.point);
+
+            CharacterSelectionReset();
         }
     }
 
@@ -76,9 +80,15 @@ public class TouchManagers : Singleton<TouchManagers>
 
         selectedCharacter = character;
 
-        print(character.ToString());
-
         SetFalseSelectedCharacters(character);
+    }
+
+    private void CharacterSelectionReset()
+    {
+        foreach (Character personage in Squad.characters)
+        {
+            personage.Selected = false;
+        }
     }
 
     private void SetFalseSelectedCharacters(Character selectedCharcter)

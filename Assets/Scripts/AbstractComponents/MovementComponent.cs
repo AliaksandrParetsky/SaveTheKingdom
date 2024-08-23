@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -52,12 +51,12 @@ public class MovementComponent : MonoBehaviour, IMovable
 
     public void Move(Vector3 target)
     {
-        isMoveToCharacter = false;
-
-        agent.isStopped = false;
-
-        if (agent != null)
+        if(agent != null && agent.isOnNavMesh)
         {
+            isMoveToCharacter = false;
+
+            agent.isStopped = false;
+
             agent.destination = target;
         }
     }

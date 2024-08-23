@@ -76,10 +76,10 @@ PrefabInstance:
       addedObject: {fileID: 5554624462429447641}
     - targetCorrespondingSourceObject: {fileID: 1949430161825482, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7069796985884173675}
+      addedObject: {fileID: 6356949964627757957}
     - targetCorrespondingSourceObject: {fileID: 1949430161825482, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6356949964627757957}
+      addedObject: {fileID: 2023114208842389157}
   m_SourcePrefab: {fileID: 100100000, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
 --- !u!1 &3390713487746673499 stripped
 GameObject:
@@ -187,22 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
-  armor: 3
---- !u!114 &7069796985884173675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390713487746673499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfaaff187e505a4ca8b186ec34fd0db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  attackDelay: 1.8
-  radiusAttack: 2.5
+  armor: 4
 --- !u!114 &6356949964627757957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,3 +201,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySearchRadius: 10
+--- !u!114 &2023114208842389157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390713487746673499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afe94b0de7079e41802718fe7dac2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackDelay: 2
+  radiusAttack: 2

@@ -10,16 +10,12 @@ public class Armor : Health
         {
             base.ReduceHealth(damage);
 
-            Debug.Log($"{gameObject.name} take {damage} damage");
-
             return;
         }
         else
         {
             damage = damage / armor;
         }
-
-        Debug.Log($"{gameObject.name} take {damage} damage");
 
         base.ReduceHealth(damage);
     }

@@ -1,49 +1,38 @@
 using System;
-using UnityEngine;
 
-public class StartGameState :MonoBehaviour, IGameState
+public class StartGameState : IGameState
 {
-    private TouchManagers touchManagers;
-    private IEnemySpawn enemySpawn;
-    private Health health;
-
-    private bool isDestroy;
-
-    private void Awake()
-    {
-        touchManagers = TouchManagers.Instance;
-    }
+    public static event Action onUIChangeCountEnemy;
 
     private void MinionesSpawner_OnDestroyEvent()
     {
-        isDestroy = true;
+        StateManager.SetState(new EndGameState());
     }
 
     public void EnterState(StateManager stateManager)
     {
-        health = FindObjectOfType<CharactersSpawner>().GetComponent<Health>();
-        health.diedEvent += MinionesSpawner_OnDestroyEvent;
-        health.GetComponent<ICharactersSpawn>().CharactersSpawn();
+        StateManager.health.diedEvent += MinionesSpawner_OnDestroyEvent;
+        StateManager.enemySpawn.StartSpawn();
 
-        enemySpawn = FindObjectOfType<EnemySpawner>().GetComponent<IEnemySpawn>();
-        enemySpawn.StartSpawn();
+        Enemy.onChangeCountEnemy += Enemy_onChangeCountEnemy;
     }
 
-    public void UpdateState(StateManager stateManager)
+    private void Enemy_onChangeCountEnemy()
     {
-        if (isDestroy)
+        EnemyList.totalValueEnemies -= 1;
+
+        onUIChangeCountEnemy?.Invoke();
+
+        if (EnemyList.totalValueEnemies == 0)
         {
-            stateManager.SetState(stateManager.gameObject.AddComponent<EndGameState>());
+            StateManager.SetState(new EndGameState());
         }
     }
 
     public void ExitState(StateManager stateManager)
     {
-        Destroy(this);
-    }
+        StateManager.health.diedEvent -= MinionesSpawner_OnDestroyEvent;
 
-    private void OnDisable()
-    {
-        health.diedEvent -= MinionesSpawner_OnDestroyEvent;
+        Enemy.onChangeCountEnemy -= Enemy_onChangeCountEnemy;
     }
 }

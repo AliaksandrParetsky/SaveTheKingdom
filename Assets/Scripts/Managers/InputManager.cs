@@ -8,7 +8,6 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
     private InputControls.GameInputActions inputActions;
 
     public event Action<Vector2> OnTouchEvent;
-    public event Action OnUITouch;
 
     private void OnEnable()
     {
@@ -24,15 +23,15 @@ public class InputManager : Singleton<InputManager>, InputControls.IGameInputAct
 
     public void OnTouch(InputAction.CallbackContext context)
     {
-        OnUITouch?.Invoke();
+        if(context.phase == InputActionPhase.Started)
+        {
+            OnTouchEvent?.Invoke(inputActions.TouchPosition.ReadValue<Vector2>());
+        }
     }
 
     public void OnTouchPosition(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-        {
-            OnTouchEvent?.Invoke(context.ReadValue<Vector2>());
-        } 
+        
     }
 
     private void OnDisable()

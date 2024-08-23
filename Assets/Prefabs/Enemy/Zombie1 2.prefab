@@ -1727,8 +1727,8 @@ GameObject:
   - component: {fileID: -2160265706000321441}
   - component: {fileID: -6792945086980632426}
   - component: {fileID: -2150454112475446221}
-  - component: {fileID: 5185155429067680724}
   - component: {fileID: -1974179306062221785}
+  - component: {fileID: 7312669061921045071}
   m_Layer: 0
   m_Name: Zombie1 2
   m_TagString: Untagged
@@ -1895,21 +1895,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   armor: 2
---- !u!114 &5185155429067680724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493914613880827488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dfaaff187e505a4ca8b186ec34fd0db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  attackDelay: 2
-  radiusAttack: 2.5
 --- !u!114 &-1974179306062221785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,6 +1908,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySearchRadius: 10
+--- !u!114 &7312669061921045071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493914613880827488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afe94b0de7079e41802718fe7dac2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackDelay: 2
+  radiusAttack: 2.5
 --- !u!1 &4710940672626480558
 GameObject:
   m_ObjectHideFlags: 0

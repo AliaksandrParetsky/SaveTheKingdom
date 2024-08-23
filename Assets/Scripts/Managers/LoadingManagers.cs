@@ -24,10 +24,10 @@ public class LoadingManagers : MonoBehaviour
 
     private void OnEnable()
     {
-        inputManager.OnUITouch += InputManager_OnUITouch;
+        inputManager.OnTouchEvent += InputManager_OnUITouch;
     }
 
-    private void InputManager_OnUITouch()
+    private void InputManager_OnUITouch(Vector2 vector2)
     {
         isTouch = true;
     }
@@ -73,6 +73,6 @@ public class LoadingManagers : MonoBehaviour
 
     private void OnDisable()
     {
-        inputManager.OnUITouch -= InputManager_OnUITouch;
+        inputManager.OnTouchEvent -= InputManager_OnUITouch;
     }
 }

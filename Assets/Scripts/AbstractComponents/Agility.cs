@@ -9,7 +9,5 @@ public class Agility : Health
         damage = damage - agility;
 
         base.ReduceHealth(damage);
-
-        Debug.Log($"{gameObject.name} take {damage} damage");
     }
 }

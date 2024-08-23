@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Health : MonoBehaviour
 {
-    //public event Action<int> changed;
     public event Action diedEvent;
 
     [SerializeField] private float health;
@@ -27,12 +26,8 @@ public class Health : MonoBehaviour
         {
             health = health - damage;
 
-            //changed?.Invoke(health);
-
             if (health <= 0)
             {
-                print($"{gameObject.name} died");
-
                 StartCoroutine(Death());
             }
         }
@@ -50,12 +45,12 @@ public class Health : MonoBehaviour
         }
         
         diedEvent?.Invoke();
-
+        
         enabled = false;
 
         for(int i = 0; i < 1; i++)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.5f);
         }
 
         Destroy(gameObject);

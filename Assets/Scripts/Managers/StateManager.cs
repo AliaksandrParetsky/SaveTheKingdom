@@ -1,30 +1,37 @@
+using UnityEngine;
 
 public class StateManager : Singleton<StateManager>
 {
-    private IGameState currentState;
+    private static IGameState currentState;
+
+    public static IEnemySpawn enemySpawn;
+    public static Health health;
+
+    private TouchManagers touchManagers;
+
+    private void Awake()
+    {
+        touchManagers = TouchManagers.Instance;
+    }
 
     private void Start()
     {
-        SetState(gameObject.AddComponent<StartGameState>());
+        health = GameObject.FindObjectOfType<CharactersSpawner>().GetComponent<Health>();
+        enemySpawn = GameObject.FindObjectOfType<EnemySpawner>().GetComponent<IEnemySpawn>();
+        
+        health.GetComponent<ICharactersSpawn>().CharactersSpawn();
+
+        SetState(new StartGameState());
     }
 
-    public void SetState(IGameState newState)
+    public static void SetState(IGameState newState)
     {
         if(currentState != null)
         {
-            currentState.ExitState(this);
+            currentState.ExitState(Instance);
         }
 
         currentState = newState;
-        currentState.EnterState(this);
+        currentState.EnterState(Instance);
     }
-
-    private void Update()
-    {
-        if (currentState != null)
-        {
-            currentState.UpdateState(this);
-        }
-    }
-
 }

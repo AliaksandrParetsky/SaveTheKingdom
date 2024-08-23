@@ -60,6 +60,17 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""96324c2e-24e8-4105-ba3e-bba2475ed09d"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""86a8ee5c-7292-442c-8bbf-9c477f407f4b"",
                     ""path"": ""<Touchscreen>/primaryTouch/press"",
                     ""interactions"": """",

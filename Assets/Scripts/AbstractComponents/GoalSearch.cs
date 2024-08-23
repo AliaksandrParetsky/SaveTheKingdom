@@ -88,8 +88,6 @@ public class GoalSearch : MonoBehaviour
         {
             attackBehavior.CurrentTarget = null;
 
-           
-
             if(TryGetComponent<Enemy>(out var enemy))
             {
                 attackBehavior.CurrentTarget = enemy.MainTarget;
@@ -110,8 +108,6 @@ public class GoalSearch : MonoBehaviour
                 {
                     yield return null;
                 }
-
-                Debug.Log(agent.pathStatus.ToString() + $"{gameObject.name}");
 
                 if (agent.pathStatus != NavMeshPathStatus.PathInvalid)
                 {

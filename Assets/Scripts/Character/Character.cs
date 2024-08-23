@@ -10,8 +10,6 @@ public class Character : BaseCharacter
         Squad.characters.Add(this);
     }
 
-    
-
     public override void OnDisable()
     {
         base.OnDisable();

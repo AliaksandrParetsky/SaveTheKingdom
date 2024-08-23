@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent (typeof(MovementComponent))]
@@ -7,6 +8,8 @@ public class Enemy : BaseCharacter
     public Health MainTarget { get { return mainTarget; } private set { mainTarget = value; } }
 
     private IMovable movable;
+
+    public static event Action onChangeCountEnemy;
 
     public override void OnEnable()
     {
@@ -32,6 +35,8 @@ public class Enemy : BaseCharacter
 
     public override void OnDisable()
     {
+        onChangeCountEnemy?.Invoke();
+
         EnemyList.enemies.Remove(this);
     }
 }

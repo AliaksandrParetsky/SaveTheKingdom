@@ -20,6 +20,13 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawn
     private void Awake()
     {
         rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+
+        SetTotalValueEnemies();
+    }
+
+    private void SetTotalValueEnemies()
+    {
+        EnemyList.totalValueEnemies = amountEnemiesFirstWave + (amountEnemiesSecondWave * 2) + (amountEnemiesThirdWave * 3);
     }
 
     private Vector3 GetRandomPosition()
